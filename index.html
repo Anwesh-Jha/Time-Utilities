@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <script src="https://kit.fontawesome.com/3b9824ba25.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+<div class="myclock">
+    <div class="container">
+        <div class="clock">
+            <div class="circle" id="sc" style="--clr:#e64398"><i></i></div>
+            <div class="circle circle2" id="mn" style="--clr:#a64ac9"><i></i></div>
+            <div class="circle circle3" id="hr" style="--clr:#5680e9"><i></i></div>
+            <span style="--i:1;"><b>1</b></span>
+            <span style="--i:2;"><b>2</b></span>
+            <span style="--i:3;"><b>3</b></span>
+            <span style="--i:4;"><b>4</b></span>
+            <span style="--i:5;"><b>5</b></span>
+            <span style="--i:6;"><b>6</b></span>
+            <span style="--i:7;"><b>7</b></span>
+            <span style="--i:8;"><b>8</b></span>
+            <span style="--i:9;"><b>9</b></span>
+            <span style="--i:10;"><b>10</b></span>
+            <span style="--i:11;"><b>11</b></span>
+            <span style="--i:12;"><b>12</b></span>
+        </div>
+
+        <div id="time">
+            <div id="hours" style="--clr:#5680e9">00</div>
+            <div id="minutes" style="--clr:#a64ac9">00</div>
+            <div id="seconds" style="--clr:#e64398">00</div>
+            <div id="ampm" style="--clr:#ff98ce">AM</div>
+        </div>
+    </div>
+</div>
+
+<div class="stopwatch-container" id="stopwatch">
+    <div class="stopwatch">
+        <div class="text" id="displayTime">
+            <h1 style="color: #fae4ff;">00 : 00 : 00</h1>
+        </div>
+    <div class="buttons">
+        <div class="play-pause">
+            <i id="playBtn" class="fa-solid fa-play" style="--clr: #e64398;"></i>
+            <i id="pauseBtn" class="fa-solid fa-pause" style="--clr: #5680e9;"></i>
+        </div>
+            <i class="fa-solid fa-stop" style="--clr: #a64ac9;"></i>
+        </div>
+</div>
+</div>
+<script>
+    function updateClock() {
+        let hr = document.querySelector('#hr');
+        let mn = document.querySelector('#mn');
+        let sc = document.querySelector('#sc');
+
+        let day = new Date();
+        let hh = day.getHours() * 30;
+        let mm = day.getMinutes() * 6;
+        let ss = day.getSeconds() * 6;
+
+        hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+        mn.style.transform = `rotateZ(${mm}deg)`;
+        sc.style.transform = `rotateZ(${ss}deg)`;
+
+        let hours = document.getElementById('hours');
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        let ampm = document.getElementById('ampm');
+
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        let am = h >= 12? "PM" : "AM";
+        if(h>12){
+            h = h-12;
+        }
+        <!-- h = (h < 10) ? "0" + h : h -->
+        m = (m < 10)? "0" + m : m
+        s = (s < 10) ? "0" + s : s
+
+        hours.innerHTML = h;
+        minutes.innerHTML = m;
+        seconds.innerHTML = s;
+        ampm.innerHTML = am;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call
+</script>
+<script>
+    let [s_seconds, s_minutes, s_hours] = [0, 0, 0];
+let displayTime = document.getElementById("displayTime").querySelector("h1");
+let timer = null;
+
+let playBtn = document.getElementById("playBtn");
+let pauseBtn = document.getElementById("pauseBtn");
+
+function stopwatch() {
+    s_seconds++;
+    if (s_seconds == 60) {
+        s_seconds = 0;
+        s_minutes++;
+    }
+    if (s_minutes == 60) {
+        s_minutes = 0;
+        s_hours++;
+    }
+
+    let s_h = s_hours < 10 ? "0" + s_hours : s_hours;
+    let s_m = s_minutes < 10 ? "0" + s_minutes : s_minutes;
+    let s_s = s_seconds < 10 ? "0" + s_seconds : s_seconds;
+
+    displayTime.innerHTML = `${s_h} : ${s_m} : ${s_s}`;
+}
+
+function watchStart() {
+    if (timer !== null) {
+        clearInterval(timer);
+    }
+    timer = setInterval(stopwatch, 1000);
+    
+    // Toggle visibility of buttons
+    playBtn.style.display = "none";
+    pauseBtn.style.display = "block";
+}
+
+function watchPause() {
+    clearInterval(timer);
+    
+    // Toggle visibility
+    playBtn.style.display = "block";
+    pauseBtn.style.display = "none";
+}
+
+function watchReset() {
+    clearInterval(timer);
+    [s_seconds, s_minutes, s_hours] = [0, 0, 0];
+    displayTime.innerHTML = "00 : 00 : 00";
+    
+    // Reset to initial state
+    playBtn.style.display = "block";
+    pauseBtn.style.display = "none";
+}
+
+// Attach event listeners to buttons
+playBtn.addEventListener("click", watchStart);
+pauseBtn.addEventListener("click", watchPause);
+document.querySelector(".fa-stop").addEventListener("click", watchReset);
+
+</script>
+<script>
+    const cursorDot = document.querySelector("[data-cursor-dot]");
+    const cursorOutline = document.querySelector("[data-cursor-outline]");
+    window.addEventListener("mousemove", function (e){
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, {duration: 200, fill: "forwards"});
+
+    });
+</script>
+</body>
+</html>
