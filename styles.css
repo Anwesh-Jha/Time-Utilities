@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family-Poppins:200,300,400,500,600,700,800,900&display=swap');
+@font-face {
+    font-family: 'Italiano';
+    src: url('WeddingdayPersonalUseRegular-1Gvo0.ttf') format('opentype'); /* Adjust path if needed */
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 *{
     margin: 0;
@@ -6,11 +13,70 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+:root{
+        scroll-behavior: smooth;
+}
 body{
     min-height: 100vh;
     background-color: #190f27;
     cursor: none;
 }
+.navc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.nav{
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    width: 80%;
+    display: flex;
+    color: #5680e9;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    height: 60px;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    padding: 5px;
+    background-color:#150b20;
+    justify-self: center;
+}
+.nav a{
+    text-decoration: none;
+    color: #a64ac9;
+    font-size: 1.45em;
+}
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #190f27;
+    color: #e64398;
+    border-radius: 10px;
+}
+.navbar i{
+    width: 30px;
+    margin: 10px;
+}
+/* Add this to your CSS */
+
+
+/* Navbar icon hover effects */
+.navbar a i {
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #e64398; /* Default color */
+}
+
+
+/* Hover Effect for Navbar Icons */
+.navbar a i:hover {
+    transform: translateY(5px); /* Slightly uplifts the icon */
+}
+
+
 .cursor-dot{
     width: 7px;
     height: 7px;
@@ -37,6 +103,7 @@ body{
     align-items: center;
     min-height: 100vh;
 }
+
 
 .container{
     position: relative;
@@ -76,7 +143,7 @@ body{
     height: 8px;
     background-color: #2A1B3D;
     border: 3px solid #fae4ff;
-    border-radius: 50%; 
+    border-radius: 50%;
     z-index: 7123;
 }
 .clock span{
@@ -194,18 +261,29 @@ body{
     margin-top: 40vh;
 }
 .stopwatch{
+    color: #5680e9;
     width: 90%px;
-    height: 100vh;
+     /* box-shadow: 1px 5px 7px rgba(0,0,0,25); */
+    height: 35vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    border-radius: 40px;
+}
+.texthead{
+    font-family: 'Italiano';
+    font-size: 4em;
+    text-align: center;
+    text-shadow: 0 0 10px #5680e9,
+    0 0 80px #5680e9;
 }
 .text{
     border-radius: 100px;
     box-shadow: 1px 5px 7px rgba(0,0,0,25);
     padding: 5px;
-    border: 2px solid ;border: 2px solid rgba(0,0,0,0.5);
+    border: 2px solid rgba(0,0,0,0.5);
     width: 350px;
     font-size: 1.7em;
     max-height: 70px;
@@ -217,6 +295,7 @@ body{
     margin-bottom: 30px;
 }
 
+
 .buttons {
     text-align: center;
     font-size: 1.3em;
@@ -226,11 +305,13 @@ body{
     gap: 20px; /* Space between buttons */
 }
 
+
 .play-pause {
     display: flex;
     flex-direction: column; /* Stack play/pause buttons */
     align-items: center;
 }
+
 
 .buttons i {
     width: 50px;
@@ -239,12 +320,18 @@ body{
     transition: opacity 0.3s ease-in-out;
 }
 
+
 #playBtn {
     display: block; /* Show play initially */
 }
 
+
 #pauseBtn {
     display: none; /* Hide pause initially */
 }
+
+
+
+
 
 

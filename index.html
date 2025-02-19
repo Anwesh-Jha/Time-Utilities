@@ -8,11 +8,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="navc">
+    <div class="nav">
+        <h1 class="name">Anwesh Jha</h1>
+        <a href="https://www.sxc.edu.np/">St. Xavier's College</a>
+        <div class="navbar">
+            <a href="#clock">
+                <i class="fa-solid fa-clock" style="color: #e64398;"></i>
+            </a>
+            <a href="#stopwatch">
+                <i class="fa-solid fa-stopwatch" style="color: #e64398;"></i>
+            </a>
+        </div>
+    </div>
+    </div>
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
-<div class="myclock">
+<div class="myclock"id = "clock">
     <div class="container">
-        <div class="clock">
+        <div class="clock" >
             <div class="circle" id="sc" style="--clr:#e64398"><i></i></div>
             <div class="circle circle2" id="mn" style="--clr:#a64ac9"><i></i></div>
             <div class="circle circle3" id="hr" style="--clr:#5680e9"><i></i></div>
@@ -30,6 +44,7 @@
             <span style="--i:12;"><b>12</b></span>
         </div>
 
+
         <div id="time">
             <div id="hours" style="--clr:#5680e9">00</div>
             <div id="minutes" style="--clr:#a64ac9">00</div>
@@ -39,8 +54,10 @@
     </div>
 </div>
 
+
 <div class="stopwatch-container" id="stopwatch">
     <div class="stopwatch">
+        <h1 class = "texthead">Stopwatch</h1><br>
         <div class="text" id="displayTime">
             <h1 style="color: #fae4ff;">00 : 00 : 00</h1>
         </div>
@@ -59,19 +76,23 @@
         let mn = document.querySelector('#mn');
         let sc = document.querySelector('#sc');
 
+
         let day = new Date();
         let hh = day.getHours() * 30;
         let mm = day.getMinutes() * 6;
         let ss = day.getSeconds() * 6;
 
+
         hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
         mn.style.transform = `rotateZ(${mm}deg)`;
         sc.style.transform = `rotateZ(${ss}deg)`;
+
 
         let hours = document.getElementById('hours');
         let minutes = document.getElementById('minutes');
         let seconds = document.getElementById('seconds');
         let ampm = document.getElementById('ampm');
+
 
         let h = new Date().getHours();
         let m = new Date().getMinutes();
@@ -84,11 +105,13 @@
         m = (m < 10)? "0" + m : m
         s = (s < 10) ? "0" + s : s
 
+
         hours.innerHTML = h;
         minutes.innerHTML = m;
         seconds.innerHTML = s;
         ampm.innerHTML = am;
     }
+
 
     setInterval(updateClock, 1000);
     updateClock(); // Initial call
@@ -98,8 +121,10 @@
 let displayTime = document.getElementById("displayTime").querySelector("h1");
 let timer = null;
 
+
 let playBtn = document.getElementById("playBtn");
 let pauseBtn = document.getElementById("pauseBtn");
+
 
 function stopwatch() {
     s_seconds++;
@@ -112,46 +137,53 @@ function stopwatch() {
         s_hours++;
     }
 
+
     let s_h = s_hours < 10 ? "0" + s_hours : s_hours;
     let s_m = s_minutes < 10 ? "0" + s_minutes : s_minutes;
     let s_s = s_seconds < 10 ? "0" + s_seconds : s_seconds;
 
+
     displayTime.innerHTML = `${s_h} : ${s_m} : ${s_s}`;
 }
+
 
 function watchStart() {
     if (timer !== null) {
         clearInterval(timer);
     }
     timer = setInterval(stopwatch, 1000);
-    
+   
     // Toggle visibility of buttons
     playBtn.style.display = "none";
     pauseBtn.style.display = "block";
 }
 
+
 function watchPause() {
     clearInterval(timer);
-    
+   
     // Toggle visibility
     playBtn.style.display = "block";
     pauseBtn.style.display = "none";
 }
 
+
 function watchReset() {
     clearInterval(timer);
     [s_seconds, s_minutes, s_hours] = [0, 0, 0];
     displayTime.innerHTML = "00 : 00 : 00";
-    
+   
     // Reset to initial state
     playBtn.style.display = "block";
     pauseBtn.style.display = "none";
 }
 
+
 // Attach event listeners to buttons
 playBtn.addEventListener("click", watchStart);
 pauseBtn.addEventListener("click", watchPause);
 document.querySelector(".fa-stop").addEventListener("click", watchReset);
+
 
 </script>
 <script>
@@ -161,12 +193,14 @@ document.querySelector(".fa-stop").addEventListener("click", watchReset);
         const posX = e.clientX;
         const posY = e.clientY;
 
+
         cursorDot.style.left = `${posX}px`;
         cursorDot.style.top = `${posY}px`;
         cursorOutline.animate({
             left: `${posX}px`,
             top: `${posY}px`
         }, {duration: 200, fill: "forwards"});
+
 
     });
 </script>
